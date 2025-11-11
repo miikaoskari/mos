@@ -10,12 +10,45 @@ set(CMAKE_OBJCOPY aarch64-none-elf-objcopy)
 set(CMAKE_C_COMPILER_WORKS 1)
 set(CMAKE_ASM_COMPILER_WORKS 1)
 
+include(FetchContent)
+
 project(mos C ASM)
 
 add_executable(kernel.elf
     src/main.c
     src/boot.S
+    libs/string/memchr.c
+    libs/string/memcmp.c
+    libs/string/memcpy.c
+    libs/string/memmove.c
+    libs/string/strlen.c
+    libs/string/strnlen.c
 )
+
+include_directories(include)
+
+FetchContent_Declare(
+    libfdt
+    GIT_REPOSITORY https://github.com/dgibson/dtc.git 
+    GIT_TAG        v1.7.2
+)
+
+FetchContent_MakeAvailable(libfdt)
+
+add_library(fdt STATIC
+    ${libfdt_SOURCE_DIR}/libfdt/fdt.c
+    ${libfdt_SOURCE_DIR}/libfdt/fdt_ro.c
+    ${libfdt_SOURCE_DIR}/libfdt/fdt_wip.c
+    ${libfdt_SOURCE_DIR}/libfdt/fdt_sw.c
+    ${libfdt_SOURCE_DIR}/libfdt/fdt_rw.c
+    ${libfdt_SOURCE_DIR}/libfdt/fdt_strerror.c
+)
+
+target_include_directories(fdt PUBLIC
+    ${libfdt_SOURCE_DIR}/libfdt
+)
+
+target_link_libraries(kernel.elf PRIVATE fdt)
 
 # C compiler options
 target_compile_options(kernel.elf PRIVATE
