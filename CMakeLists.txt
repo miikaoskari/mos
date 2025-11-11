@@ -17,12 +17,15 @@ project(mos C ASM)
 add_executable(kernel.elf
     src/main.c
     src/boot.S
+    src/driver.c
     libs/string/memchr.c
     libs/string/memcmp.c
     libs/string/memcpy.c
     libs/string/memmove.c
     libs/string/memrchr.c
+    libs/string/strcmp.c
     libs/string/strlen.c
+    libs/string/strncmp.c
     libs/string/strnlen.c
     libs/string/strrchr.c
 )
