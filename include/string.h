@@ -28,6 +28,7 @@ void *memmove (void *, const void *, size_t);
 void *memset (void *, int, size_t);
 int memcmp (const void *, const void *, size_t);
 void *memchr (const void *, int, size_t);
+void *memrchr(const void *m, int c, size_t n);
 
 char *strcpy (char *__restrict, const char *__restrict);
 char *strncpy (char *__restrict, const char *__restrict, size_t);

@@ -21,8 +21,10 @@ add_executable(kernel.elf
     libs/string/memcmp.c
     libs/string/memcpy.c
     libs/string/memmove.c
+    libs/string/memrchr.c
     libs/string/strlen.c
     libs/string/strnlen.c
+    libs/string/strrchr.c
 )
 
 include_directories(include)
