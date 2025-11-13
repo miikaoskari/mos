@@ -1,17 +1,17 @@
 #include "driver.h"
 
-void pl011_probe()
+int pl011_probe(device_t *dev)
 {
-
+    return 0;
 }
 
 driver_t driver = {
     .name = "pl011",
     .compatible = "arm,pl011",
-    .probe = pl011_probe
+    .probe = pl011_probe,
 };
 
 void pl011_driver_init(void)
 {
-    register_new_driver(&pl011_probe);
+    register_new_driver(&driver);
 }
