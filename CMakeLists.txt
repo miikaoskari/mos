@@ -28,6 +28,7 @@ add_executable(kernel.elf
     libs/string/strncmp.c
     libs/string/strnlen.c
     libs/string/strrchr.c
+    src/drivers/tty/serial/arm/pl011/pl011.c
 )
 
 include_directories(include)
