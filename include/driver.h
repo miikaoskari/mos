@@ -13,6 +13,7 @@ typedef struct driver_s driver_t;
 
 typedef struct driver_s
 {
+    void (*init);
     const char *name;
     const char *compatible;
 

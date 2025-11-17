@@ -5,7 +5,14 @@ SECTIONS {
     .text : { *(.text) }
     .data : { *(.data) }
     .bss : { *(.bss COMMON) }
-    . = ALIGN(8);
-    . += 0x1000; /* 4kB of stack memory */
+    
+    __drivers_start = .;
+    .drivers : {
+        KEEP(*(.drivers))
+    }
+    __drivers_end = .;
+
+    . = ALIGN(16);
+    . += 0x4000; /* 16kB of stack memory */
     stack_top = .;
 }
