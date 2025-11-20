@@ -31,9 +31,8 @@ typedef struct device_s
     const driver_t *driver;
 } device_t;
 
-void init_all_drivers();
+void init_all_drivers(void);
 const driver_t *find_driver(const char *compatible);
-void probe_all_drivers();
 void probe_all_drivers_from_fdt(void *fdt);
 void register_new_driver(const driver_t *driver);
 

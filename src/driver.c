@@ -1,8 +1,8 @@
 #include "driver.h"
 #include "pl011.h"
 
-extern const driver_t __drivers_start;
-extern const driver_t __drivers_end;
+extern driver_t __drivers_start;
+extern driver_t __drivers_end;
 
 static const struct driver_s *registered_drivers[MAX_DRIVERS];
 static int driver_count = 0;
@@ -68,6 +68,8 @@ void probe_all_drivers_from_fdt(void *fdt)
                 };
 
                 const fdt32_t *reg = fdt_getprop(fdt, node_offset, "reg", &len);
+                device.reg_base = fdt32_to_cpu(*reg);
+
 
             }
         }
