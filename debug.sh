@@ -4,4 +4,6 @@ qemu-system-aarch64 \
     -cpu cortex-a57 \
     -kernel build/kernel.elf \
     -nographic \
-    -s -S
+    -s -S &
+
+./gdb.sh
