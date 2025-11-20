@@ -63,6 +63,18 @@ target_compile_options(kernel.elf PRIVATE
     $<$<COMPILE_LANGUAGE:C>:-O0>
     $<$<COMPILE_LANGUAGE:C>:-g3>
     $<$<COMPILE_LANGUAGE:C>:-Wall>
+    $<$<COMPILE_LANGUAGE:C>:-Wextra>
+    $<$<COMPILE_LANGUAGE:C>:-Wpedantic>
+    $<$<COMPILE_LANGUAGE:C>:-Wunused>
+    $<$<COMPILE_LANGUAGE:C>:-Wconversion>
+    $<$<COMPILE_LANGUAGE:C>:-Wsign-conversion>
+    $<$<COMPILE_LANGUAGE:C>:-Wuninitialized>
+    $<$<COMPILE_LANGUAGE:C>:-Wshadow>
+    $<$<COMPILE_LANGUAGE:C>:-Wpointer-arith>
+    $<$<COMPILE_LANGUAGE:C>:-Wcast-align>
+    $<$<COMPILE_LANGUAGE:C>:-Wwrite-strings>
+    $<$<COMPILE_LANGUAGE:C>:-Wmissing-prototypes>
+    $<$<COMPILE_LANGUAGE:C>:-Wstrict-prototypes>
     $<$<COMPILE_LANGUAGE:C>:-fno-omit-frame-pointer>
 )
 
