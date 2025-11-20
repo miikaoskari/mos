@@ -8,9 +8,10 @@ int pl011_probe(device_t *dev)
 
 void pl011_driver_init(void)
 {
+    return;
 }
 
-__attribute__((section(".drivers")))
+__attribute__((used, section(".drivers")))
 driver_t driver = {
     .init = pl011_driver_init,
     .name = "pl011",
