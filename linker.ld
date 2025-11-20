@@ -6,11 +6,11 @@ SECTIONS {
     .data : { *(.data) }
     .bss : { *(.bss COMMON) }
     
-    __drivers_start = .;
     .drivers : {
+        __drivers_start = .;
         KEEP(*(.drivers))
+        __drivers_end = .;
     }
-    __drivers_end = .;
 
     . = ALIGN(16);
     . += 0x4000; /* 16kB of stack memory */

@@ -8,16 +8,13 @@
 struct device_s;
 struct driver_s;
 
-typedef struct device_s device_t;
-typedef struct driver_s driver_t;
-
 typedef struct driver_s
 {
-    void (*init);
+    void (*init)(void);
     const char *name;
     const char *compatible;
 
-    int (*probe)(device_t *dev);
+    int (*probe)(struct device_s *dev);
 } driver_t;
 
 typedef struct device_s
