@@ -10,6 +10,8 @@ set(CMAKE_OBJCOPY aarch64-none-elf-objcopy)
 set(CMAKE_C_COMPILER_WORKS 1)
 set(CMAKE_ASM_COMPILER_WORKS 1)
 
+set(CMAKE_COLOR_DIAGNOSTICS ON)
+
 include(FetchContent)
 
 project(mos C ASM)
