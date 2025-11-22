@@ -25,6 +25,7 @@ add_executable(kernel.elf
     libs/string/memcpy.c
     libs/string/memmove.c
     libs/string/memrchr.c
+    libs/string/memset.c
     libs/string/strcmp.c
     libs/string/strlen.c
     libs/string/strncmp.c
