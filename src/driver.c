@@ -9,7 +9,7 @@ static int driver_count = 0;
 
 const driver_t *find_driver(const char *compatible)
 {
-    for (size_t i = 0; i < driver_count; i++)
+    for (int i = 0; i < driver_count; i++)
     {
         if (strcmp(compatible, registered_drivers[i]->compatible) == 0)
         {
@@ -44,6 +44,9 @@ void probe_all_drivers_from_fdt(void *fdt)
     int node_offset = 0;
     int depth = 0;
 
+    int size_cells = fdt_size_cells(fdt, node_offset);
+    int address_cells = fdt_address_cells(fdt, node_offset);
+
     /* walk through the device tree
      * non-recursive for now */
     while (node_offset >= 0)
@@ -68,8 +71,25 @@ void probe_all_drivers_from_fdt(void *fdt)
                 };
 
                 const fdt32_t *reg = fdt_getprop(fdt, node_offset, "reg", &len);
-                device.reg_base = fdt32_to_cpu(*reg);
 
+                if (reg && len > 0)
+                {
+                    /* we have high 32 bits at location 0 and low 32 bits at location 1 */
+
+                    uint64_t addr = 0;
+                    for (int i = 0; i < address_cells; i++)
+                    {
+                        addr = (addr << 32) | fdt32_to_cpu(reg[i]);
+                    }
+                    device.reg_base = addr;
+
+                    uint64_t size = 0;
+                    for (int i = 0; i < size_cells; i++)
+                    {
+                        size = (size << 32) | fdt32_to_cpu(reg[address_cells + i]);
+                    }
+                    device.reg_size = size;
+                }
 
             }
         }
