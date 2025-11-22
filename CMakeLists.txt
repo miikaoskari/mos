@@ -46,6 +46,7 @@ FetchContent_MakeAvailable(libfdt)
 
 add_library(fdt STATIC
     ${libfdt_SOURCE_DIR}/libfdt/fdt.c
+    ${libfdt_SOURCE_DIR}/libfdt/fdt_addresses.c
     ${libfdt_SOURCE_DIR}/libfdt/fdt_ro.c
     ${libfdt_SOURCE_DIR}/libfdt/fdt_wip.c
     ${libfdt_SOURCE_DIR}/libfdt/fdt_sw.c
