@@ -8,6 +8,12 @@
 struct device_s;
 struct driver_s;
 
+typedef enum device_type_enum {
+    DRIVER_TYPE_SERIAL,
+    DRIVER_TYPE_IRQ,
+    DRIVER_TYPE_BLOCK,
+} device_type_t;
+
 typedef struct driver_s
 {
     void (*init)(void);
@@ -15,6 +21,8 @@ typedef struct driver_s
     const char *compatible;
 
     int (*probe)(struct device_s *dev);
+
+    device_type_t type;
 } driver_t;
 
 typedef struct device_s

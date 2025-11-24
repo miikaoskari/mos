@@ -1,5 +1,4 @@
-#include "driver.h"
-#include "pl011.h"
+#include "mos/driver.h"
 
 extern driver_t __drivers_start;
 extern driver_t __drivers_end;
@@ -30,7 +29,7 @@ void init_all_drivers(void)
             register_new_driver(driver);
         }
     }
-    
+
     return;
 }
 

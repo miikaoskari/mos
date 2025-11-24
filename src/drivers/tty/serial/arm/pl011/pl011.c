@@ -1,4 +1,5 @@
-#include "driver.h"
+#include "mos/driver.h"
+#include "mos/serial.h"
 
 int pl011_probe(device_t *dev)
 {
@@ -17,4 +18,5 @@ driver_t driver = {
     .name = "pl011",
     .compatible = "arm,pl011",
     .probe = pl011_probe,
+    .type = DRIVER_TYPE_SERIAL,
 };
