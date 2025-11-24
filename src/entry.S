@@ -72,62 +72,54 @@ eret
 
 .align 11
 vectors:
-    kernel_ventry	1, t, 64, sync // Synchronous EL1t
-    kernel_ventry	1, t, 64, irq // IRQ EL1t
-    kernel_ventry	1, t, 64, fiq // FIQ EL1t
-    kernel_ventry	1, t, 64, error // Error EL1t
+    kernel_ventry 1, t, 64, sync // Synchronous EL1t
+    kernel_ventry 1, t, 64, irq // IRQ EL1t
+    kernel_ventry 1, t, 64, fiq // FIQ EL1t
+    kernel_ventry 1, t, 64, error // Error EL1t
 
-    kernel_ventry	1, h, 64, sync // Synchronous EL1h
-    kernel_ventry	1, h, 64, irq // IRQ EL1h
-    kernel_ventry	1, h, 64, fiq // FIQ EL1h
-    kernel_ventry	1, h, 64, error // Error EL1h
+    kernel_ventry 1, h, 64, sync // Synchronous EL1h
+    kernel_ventry 1, h, 64, irq // IRQ EL1h
+    kernel_ventry 1, h, 64, fiq // FIQ EL1h
+    kernel_ventry 1, h, 64, error // Error EL1h
 
-    kernel_ventry	0, t, 64, sync // Synchronous 64-bit EL0
-    kernel_ventry	0, t, 64, irq // IRQ 64-bit EL0
-    kernel_ventry	0, t, 64, fiq // FIQ 64-bit EL0
-    kernel_ventry	0, t, 64, error // Error 64-bit EL0
+    kernel_ventry 0, t, 64, sync // Synchronous 64-bit EL0
+    kernel_ventry 0, t, 64, irq // IRQ 64-bit EL0
+    kernel_ventry 0, t, 64, fiq // FIQ 64-bit EL0
+    kernel_ventry 0, t, 64, error // Error 64-bit EL0
 
-    kernel_ventry	0, t, 32, sync // Synchronous 32-bit EL0
-    kernel_ventry	0, t, 32, irq // IRQ 32-bit EL0
-    kernel_ventry	0, t, 32, fiq // FIQ 32-bit EL0
-    kernel_ventry	0, t, 32, error // Error 32-bit EL0
+    kernel_ventry 0, t, 32, sync // Synchronous 32-bit EL0
+    kernel_ventry 0, t, 32, irq // IRQ 32-bit EL0
+    kernel_ventry 0, t, 32, fiq // FIQ 32-bit EL0
+    kernel_ventry 0, t, 32, error // Error 32-bit EL0
 
-el1t_64_sync:
-    wfi
-el1t_64_irq:
-    wfi
-el1t_64_fiq:
-    wfi
-el1t_64_error:
-    wfi
 
-el1h_64_sync:
-    wfi
-el1h_64_irq:
-    wfi
-el1h_64_fiq:
-    wfi
-el1h_64_error:
-    wfi
+.macro entry_handler, el:req, ht:req, regsize:req, label:req
+el\el\ht\()_\regsize\()_\label:
+    kernel_entry \el, \regsize
+    mov x0, sp
+    bl el\el\ht\()_\regsize\()_\label\()_handler
+    kernel_exit
+.endm // entry_handler
 
-el0t_64_sync:
-    wfi
-el0t_64_irq:
-    wfi
-el0t_64_fiq:
-    wfi
-el0t_64_error:
-    wfi
+entry_handler	1, t, 64, sync
+entry_handler	1, t, 64, irq
+entry_handler	1, t, 64, fiq
+entry_handler	1, t, 64, error
 
-el0t_32_sync:
-    wfi
-el0t_32_irq:
-    wfi
-el0t_32_fiq:
-    wfi
-el0t_32_error:
-    wfi
+entry_handler	1, h, 64, sync
+entry_handler	1, h, 64, irq
+entry_handler	1, h, 64, fiq
+entry_handler	1, h, 64, error
 
+entry_handler	0, t, 64, sync
+entry_handler	0, t, 64, irq
+entry_handler	0, t, 64, fiq
+entry_handler	0, t, 64, error
+
+entry_handler	0, t, 32, sync
+entry_handler	0, t, 32, irq
+entry_handler	0, t, 32, fiq
+entry_handler	0, t, 32, error
 
 irq_vector_init:
     adr x0, vectors
