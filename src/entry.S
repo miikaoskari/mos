@@ -1,4 +1,4 @@
-#define S_FRAME_SIZE 288
+.set S_FRAME_SIZE, 288
 
 .macro kernel_ventry, el:req, ht:req, regsize:req, label:req
 .align 7
