@@ -24,6 +24,7 @@ add_executable(kernel.elf
     src/boot.S
     src/entry.S
     src/driver.c
+    src/irq.c
     libs/string/memchr.c
     libs/string/memcmp.c
     libs/string/memcpy.c
