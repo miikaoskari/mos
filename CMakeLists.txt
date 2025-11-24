@@ -22,6 +22,7 @@ project(mos C ASM)
 add_executable(kernel.elf
     src/main.c
     src/boot.S
+    src/entry.S
     src/driver.c
     libs/string/memchr.c
     libs/string/memcmp.c
