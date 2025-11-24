@@ -43,7 +43,7 @@ include_directories(include)
 
 FetchContent_Declare(
     libfdt
-    GIT_REPOSITORY https://github.com/dgibson/dtc.git 
+    GIT_REPOSITORY https://github.com/dgibson/dtc.git
     GIT_TAG        v1.7.2
 )
 
