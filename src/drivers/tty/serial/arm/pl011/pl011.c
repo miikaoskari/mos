@@ -7,7 +7,7 @@ int pl011_probe(device_t *dev)
 }
 
 
-void pl011_driver_init(void)
+void pl011_driver_init(device_t *dev)
 {
     return;
 }

@@ -18,14 +18,12 @@ const driver_t *find_driver(const char *compatible)
     return NULL;
 }
 
-void init_all_drivers(void)
+void register_all_drivers(void)
 {
     for (driver_t *driver = &__drivers_start; driver < &__drivers_end; ++driver)
     {
-        if (driver && driver->init)
+        if (driver)
         {
-            driver->init();
-
             register_new_driver(driver);
         }
     }
@@ -90,6 +88,7 @@ void probe_all_drivers_from_fdt(void *fdt)
                     device.reg_size = size;
                 }
 
+                driver->init(&device);
             }
         }
         node_offset = fdt_next_node(fdt, node_offset, &depth);

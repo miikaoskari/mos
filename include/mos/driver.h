@@ -16,7 +16,7 @@ typedef enum device_type_enum {
 
 typedef struct driver_s
 {
-    void (*init)(void);
+    void (*init)(struct device_s *dev);
     const char *name;
     const char *compatible;
 
@@ -39,7 +39,7 @@ typedef struct device_s
     const driver_t *driver;
 } device_t;
 
-void init_all_drivers(void);
+void register_all_drivers(void);
 const driver_t *find_driver(const char *compatible);
 void probe_all_drivers_from_fdt(void *fdt);
 void register_new_driver(const driver_t *driver);
