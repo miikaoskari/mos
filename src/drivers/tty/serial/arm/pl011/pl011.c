@@ -13,7 +13,7 @@ void pl011_driver_init(device_t *dev)
 }
 
 __attribute__((used, section(".drivers")))
-driver_t driver = {
+driver_t pl011_driver = {
     .init = pl011_driver_init,
     .name = "pl011",
     .compatible = "arm,pl011",

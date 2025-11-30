@@ -1,5 +1,4 @@
 #include "mos/driver.h"
-#include "mos/serial.h"
 
 int gicv3_probe(device_t *dev)
 {
@@ -10,14 +9,14 @@ int gicv3_probe(device_t *dev)
 void gicv3_driver_init(device_t *dev)
 {
     // enables gic cpu -> gicc_ctlr_b group 0
+    return;
 }
 
 __attribute__((used, section(".drivers")))
-driver_t driver = {
+driver_t gicv3_driver = {
     .init = gicv3_driver_init,
     .name = "gic-v3",
     .compatible = "arm,gic-v3",
     .probe = gicv3_probe,
     .type = DRIVER_TYPE_IRQ,
 };
-
