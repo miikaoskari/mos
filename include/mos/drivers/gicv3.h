@@ -7,6 +7,8 @@
 #ifndef GICV3_H
 #define GICV3_H
 
+#include "mos/utils.h"
+
 /*******************************************************************************
  * GICv3 and 3.1 miscellaneous definitions
  ******************************************************************************/
@@ -376,61 +378,6 @@ unsigned int gicv3_get_component_partnum(const uintptr_t gic_frame);
 static inline bool gicv3_is_intr_id_special_identifier(unsigned int id)
 {
 	return (id >= PENDING_G1S_INTID) && (id <= GIC_SPURIOUS_INTERRUPT);
-}
-
-/*******************************************************************************
- * Helper GICv3 and 3.1 macros for SEL1
- ******************************************************************************/
-static inline uint32_t gicv3_acknowledge_interrupt_sel1(void)
-{
-	return (uint32_t)read_icc_iar1_el1() & IAR1_EL1_INTID_MASK;
-}
-
-static inline uint32_t gicv3_get_pending_interrupt_id_sel1(void)
-{
-	return (uint32_t)read_icc_hppir1_el1() & HPPIR1_EL1_INTID_MASK;
-}
-
-static inline void gicv3_end_of_interrupt_sel1(unsigned int id)
-{
-	/*
-	 * Interrupt request deassertion from peripheral to GIC happens
-	 * by clearing interrupt condition by a write to the peripheral
-	 * register. It is desired that the write transfer is complete
-	 * before the core tries to change GIC state from 'AP/Active' to
-	 * a new state on seeing 'EOI write'.
-	 * Since ICC interface writes are not ordered against Device
-	 * memory writes, a barrier is required to ensure the ordering.
-	 * The dsb will also ensure *completion* of previous writes with
-	 * DEVICE nGnRnE attribute.
-	 */
-	dsbishst();
-	write_icc_eoir1_el1(id);
-}
-
-/*******************************************************************************
- * Helper GICv3 macros for EL3
- ******************************************************************************/
-static inline uint32_t gicv3_acknowledge_interrupt(void)
-{
-	return (uint32_t)read_icc_iar0_el1() & IAR0_EL1_INTID_MASK;
-}
-
-static inline void gicv3_end_of_interrupt(unsigned int id)
-{
-	/*
-	 * Interrupt request deassertion from peripheral to GIC happens
-	 * by clearing interrupt condition by a write to the peripheral
-	 * register. It is desired that the write transfer is complete
-	 * before the core tries to change GIC state from 'AP/Active' to
-	 * a new state on seeing 'EOI write'.
-	 * Since ICC interface writes are not ordered against Device
-	 * memory writes, a barrier is required to ensure the ordering.
-	 * The dsb will also ensure *completion* of previous writes with
-	 * DEVICE nGnRnE attribute.
-	 */
-	dsbishst();
-	return write_icc_eoir0_el1(id);
 }
 
 /*
