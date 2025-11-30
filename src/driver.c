@@ -57,15 +57,9 @@ void probe_all_drivers_from_fdt(void *fdt)
 
             if (driver)
             {
-                device_t device = {
-                    .compatible = compatible,
-                    .name = fdt_get_name(fdt, node_offset, NULL),
-                    .driver = driver,
-                    .irq = -1,
-                    .reg_base = 0,
-                    .reg_size = 0,
-                    .data = NULL,
-                };
+                device_t device = {0};
+
+                device.name = fdt_get_name(fdt, node_offset, NULL);
 
                 const fdt32_t *reg = fdt_getprop(fdt, node_offset, "reg", &len);
 
