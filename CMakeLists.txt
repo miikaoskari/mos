@@ -4,7 +4,7 @@ set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_SYSTEM_PROCESSOR aarch64)
 
 set(CMAKE_C_COMPILER aarch64-none-elf-gcc)
-set(CMAKE_ASM_COMPILER aarch64-none-elf-as)
+set(CMAKE_ASM_COMPILER aarch64-none-elf-gcc)
 set(CMAKE_OBJCOPY aarch64-none-elf-objcopy)
 
 set(CMAKE_C_STANDARD 23)
@@ -36,6 +36,7 @@ add_executable(kernel.elf
     libs/string/strncmp.c
     libs/string/strnlen.c
     libs/string/strrchr.c
+    src/drivers/irq/arm/gicv3/gicv3.c
     src/drivers/tty/serial/arm/pl011/pl011.c
 )
 
