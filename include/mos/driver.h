@@ -4,6 +4,7 @@
 #include <libfdt.h>
 
 #define MAX_DRIVERS 64
+#define MAX_DEVICE_REGIONS 8
 
 struct device_s;
 struct driver_s;
@@ -30,8 +31,10 @@ typedef struct device_s
     const char *name;
     const char *compatible;
 
-    uint64_t reg_base;
-    uint64_t reg_size;
+    uintptr_t reg_base[MAX_DEVICE_REGIONS];
+    uintptr_t reg_size[MAX_DEVICE_REGIONS];
+    int region_count;
+
     int irq;
 
     void *data;
