@@ -3,10 +3,6 @@ cmake_minimum_required(VERSION 3.30)
 set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_SYSTEM_PROCESSOR aarch64)
 
-set(CMAKE_C_COMPILER aarch64-none-elf-gcc)
-set(CMAKE_ASM_COMPILER aarch64-none-elf-gcc)
-set(CMAKE_OBJCOPY aarch64-none-elf-objcopy)
-
 set(CMAKE_C_STANDARD 23)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
