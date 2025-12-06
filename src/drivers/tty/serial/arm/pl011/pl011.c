@@ -1,19 +1,17 @@
 #include "mos/driver.h"
 #include "mos/serial.h"
 
-int pl011_probe(device_t *dev)
+int pl011_probe(device_t* dev)
 {
     return 0;
 }
 
-
-void pl011_driver_init(device_t *dev)
+void pl011_driver_init(device_t* dev)
 {
     return;
 }
 
-__attribute__((used, section(".drivers")))
-driver_t pl011_driver = {
+ASSING_DRIVER driver_t pl011_driver = {
     .init = pl011_driver_init,
     .name = "pl011",
     .compatible = "arm,pl011",

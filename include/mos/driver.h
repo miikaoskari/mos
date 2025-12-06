@@ -5,6 +5,7 @@
 
 #define MAX_DRIVERS 64
 #define MAX_DEVICE_REGIONS 8
+#define ASSING_DRIVER __attribute__((used, section(".drivers")))
 
 struct device_s;
 struct driver_s;

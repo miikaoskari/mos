@@ -12,8 +12,7 @@ void gicv3_driver_init(device_t *dev)
     return;
 }
 
-__attribute__((used, section(".drivers")))
-driver_t gicv3_driver = {
+ASSING_DRIVER driver_t gicv3_driver = {
     .init = gicv3_driver_init,
     .name = "gic-v3",
     .compatible = "arm,gic-v3",
