@@ -32,21 +32,27 @@ struct page* alloc_pages(const unsigned int order)
     // find a page from free_list, if any are available
     free_block = free_list[order];
 
-    if (free_block == NULL) {
-        // no free blocks, we must create one from upper order by splitting
-        // find next biggest available block and start splitting it
-        for (int new_order = order; new_order < MIN_ORDER; new_order--)
+    if (free_block != NULL) {
+        free_list[order] = free_block->next;
+        return free_block;
+    }
+
+    // no free blocks, we must create one from upper order by splitting
+    // find next biggest available block and start splitting it
+    for (int current_order = order; current_order <= MAX_ORDER; current_order++)
+    {
+        free_block = free_list[current_order];
+
+        if (free_block == NULL)
         {
-            // free block pls :)
-            free_block = free_list[new_order];
-
-            if (free_block != NULL)
-            {
-                // cool we have a block lets split it until we have desired order
-
-            }
-
+            continue;
         }
+
+        // we have a block lets split it until we have desired order
+        free_list[order] = free_block->next;
+
+
+
 
     }
 
