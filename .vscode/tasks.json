@@ -1,0 +1,51 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Launch QEMU",
+            "type": "shell",
+            "command": "qemu-system-aarch64",
+            "args": [
+                "-machine", "virt,gic-version=3",
+                "-cpu", "cortex-a57",
+                "-kernel", "build/kernel.elf",
+                "-nographic",
+                "-s",
+                "-S",
+            ],
+            "isBackground": true,
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "dedicated",
+                "showReuseMessage": false
+            }
+        },
+        {
+            "label": "Kill QEMU",
+            "type": "shell",
+            "command": "pkill -9 qemu-system-aarch64 || true",
+            "presentation": {
+                "echo": false,
+                "reveal": "never",
+                "focus": false,
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "Build Kernel",
+            "type": "shell",
+            "command": "cmake --build build",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        }
+    ]
+}
