@@ -21,17 +21,7 @@ add_executable(kernel.elf
     src/entry.S
     src/driver.c
     src/irq.c
-    libs/string/memchr.c
-    libs/string/memcmp.c
-    libs/string/memcpy.c
-    libs/string/memmove.c
-    libs/string/memrchr.c
-    libs/string/memset.c
-    libs/string/strcmp.c
-    libs/string/strlen.c
-    libs/string/strncmp.c
-    libs/string/strnlen.c
-    libs/string/strrchr.c
+    src/memory.c
     src/drivers/irq/arm/gicv3/gicv3.c
     src/drivers/tty/serial/arm/pl011/pl011.c
 )
@@ -56,11 +46,25 @@ add_library(fdt STATIC
     ${libfdt_SOURCE_DIR}/libfdt/fdt_strerror.c
 )
 
-target_include_directories(fdt PUBLIC
+target_include_directories(fdt SYSTEM PUBLIC
     ${libfdt_SOURCE_DIR}/libfdt
 )
 
-target_link_libraries(kernel.elf PRIVATE fdt)
+add_library(libc STATIC
+    libs/string/memchr.c
+    libs/string/memcmp.c
+    libs/string/memcpy.c
+    libs/string/memmove.c
+    libs/string/memrchr.c
+    libs/string/memset.c
+    libs/string/strcmp.c
+    libs/string/strlen.c
+    libs/string/strncmp.c
+    libs/string/strnlen.c
+    libs/string/strrchr.c
+)
+
+target_link_libraries(kernel.elf PRIVATE fdt libc)
 
 # C compiler options
 target_compile_options(kernel.elf PRIVATE
