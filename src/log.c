@@ -1,5 +1,4 @@
 #include "mos/log.h"
-#include "color.h"
 #include <stdarg.h>
 #include <stdint.h>
 #include <stddef.h>
