@@ -1,5 +1,4 @@
 #include "mos/driver.h"
-#include "mos/serial.h"
 
 int pl011_probe(device_t* dev)
 {
