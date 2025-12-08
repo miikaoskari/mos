@@ -22,6 +22,7 @@ add_executable(kernel.elf
     src/driver.c
     src/irq.c
     src/memory.c
+    src/log.c
     src/drivers/irq/arm/gicv3/gicv3.c
     src/drivers/tty/serial/arm/pl011/pl011.c
 )
