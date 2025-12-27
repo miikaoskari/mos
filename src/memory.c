@@ -1,7 +1,6 @@
 #include "mos/memory.h"
 #include "string.h"
 #include <stdint.h>
-#include <stdlib.h>
 
 /**
  * | order | size    |
