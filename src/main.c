@@ -18,7 +18,7 @@ void print(const char *s)
     }
 }
 
-void kmain(uint64_t dtb_ptr32, __unused uint64_t x1, __unused uint64_t x2, __unused uint64_t x3)
+void kmain(uint64_t dtb_ptr32, [[maybe_unused]] uint64_t x1, [[maybe_unused]] uint64_t x2, [[maybe_unused]] uint64_t x3)
 {
     void *fdt = (void *)(uintptr_t)dtb_ptr32;
 
