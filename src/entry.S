@@ -121,7 +121,8 @@ entry_handler	0, t, 32, irq
 entry_handler	0, t, 32, fiq
 entry_handler	0, t, 32, error
 
-irq_vector_init:
+.global _irq_vector_init
+_irq_vector_init:
     adr x0, vectors
     msr vbar_el1, x0
     ret
