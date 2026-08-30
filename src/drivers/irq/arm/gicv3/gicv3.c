@@ -1,4 +1,4 @@
-#include "mos/driver.h"
+#include "miosb/driver.h"
 
 int gicv3_probe(device_t *dev)
 {

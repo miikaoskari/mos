@@ -1,4 +1,4 @@
-#include "mos/driver.h"
+#include "miosb/driver.h"
 
 int pl011_probe(device_t* dev)
 {

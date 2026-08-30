@@ -1,10 +1,11 @@
-#include <stdint.h>
 #include <libfdt.h>
-#include "mos/driver.h"
-#include "mos/memory.h"
-#include "mos/log.h"
+#include <stdint.h>
+#include "miosb/driver.h"
+#include "miosb/memory.h"
+#include "miosb/log.h"
+#include "miosb/types.h"
 
-volatile uint8_t *uart = (uint8_t *) 0x09000000;
+volatile u8 *uart = (u8 *) 0x09000000;
 
 void putchar(char c) {
     *uart = c;
@@ -18,7 +19,7 @@ void print(const char *s)
     }
 }
 
-void kmain(uint64_t dtb_ptr32, [[maybe_unused]] uint64_t x1, [[maybe_unused]] uint64_t x2, [[maybe_unused]] uint64_t x3)
+void kmain(u64 dtb_ptr32, [[maybe_unused]] u64 x1, [[maybe_unused]] u64 x2, [[maybe_unused]] u64 x3)
 {
     void *fdt = (void *)(uintptr_t)dtb_ptr32;
 

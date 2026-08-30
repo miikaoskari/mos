@@ -1,4 +1,4 @@
-#include "mos/driver.h"
+#include "miosb/driver.h"
 
 extern driver_t __drivers_start;
 extern driver_t __drivers_end;
@@ -72,14 +72,14 @@ void probe_all_drivers_from_fdt(void *fdt)
                     {
                         addr = (addr << 32) | fdt32_to_cpu(reg[i]);
                     }
-                    device.reg_base = addr;
+                    // device.reg_base = addr;
 
                     uint64_t size = 0;
                     for (int i = 0; i < size_cells; i++)
                     {
                         size = (size << 32) | fdt32_to_cpu(reg[address_cells + i]);
                     }
-                    device.reg_size = size;
+                    // device.reg_size = size;
                 }
 
                 driver->init(&device);

@@ -1,5 +1,6 @@
-#include "mos/memory.h"
-#include "string.h"
+#include "miosb/memory.h"
+#include "miosb/string.h"
+#include "miosb/types.h"
 #include <stdint.h>
 
 /**
@@ -25,7 +26,7 @@ struct page mem_map[4096];
 // free_list[x] contains all free order x
 struct page *free_list[MAX_ORDER + 1];
 
-void phys_mem_init(uint64_t phys_ram_start, uint64_t phys_ram_size, uint64_t kernel_start_addr, uint64_t kernel_end_addr)
+void phys_mem_init(u64 phys_ram_start, u64 phys_ram_size, u64 kernel_start_addr, u64 kernel_end_addr)
 {
     memset(mem_map, 0, sizeof(mem_map));
     memset(free_list, 0, sizeof(free_list));

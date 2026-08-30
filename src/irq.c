@@ -1,10 +1,11 @@
-#include <stdint.h>
+#include "miosb/types.h"
 
 typedef struct {
-    uint64_t regs[31];
-    uint64_t elr;
-    uint64_t spsr;
-    uint64_t sp;
+    u64 regs[31];
+    u64 __pad; /* x30 is stored alone, see entry.S */
+    u64 elr;
+    u64 spsr;
+    u64 sp;
 } pt_regs;
 
 void el1t_64_sync_handler(pt_regs *regs)
