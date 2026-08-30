@@ -8,7 +8,7 @@
 #ifndef ARCH_H
 #define ARCH_H
 
-#include "mos/utils.h"
+#include "miosb/bits.h"
 
 /*******************************************************************************
  * MIDR bit definitions

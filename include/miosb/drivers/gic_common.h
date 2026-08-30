@@ -8,7 +8,7 @@
 #ifndef GIC_COMMON_H
 #define GIC_COMMON_H
 
-#include "mos/utils.h"
+#include "miosb/utils.h"
 
 /*******************************************************************************
  * GIC Distributor interface general definitions

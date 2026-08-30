@@ -7,7 +7,7 @@
 #ifndef GICV3_H
 #define GICV3_H
 
-#include "mos/utils.h"
+#include "miosb/utils.h"
 
 /*******************************************************************************
  * GICv3 and 3.1 miscellaneous definitions
