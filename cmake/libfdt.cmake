@@ -20,5 +20,5 @@ add_library(fdt STATIC
 
 target_include_directories(fdt SYSTEM PUBLIC
     ${libfdt_SOURCE_DIR}/libfdt
-    ${CMAKE_SOURCE_DIR}/include
+    ${CMAKE_SOURCE_DIR}/include/miosb
 )
