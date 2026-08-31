@@ -1,9 +1,11 @@
 #include <libfdt.h>
+#include <platform/aarch64/barrier.h>
 #include <stdint.h>
 #include "miosb/driver.h"
 #include "miosb/memory.h"
 #include "miosb/log.h"
 #include "miosb/types.h"
+#include "miosb/idmap.h"
 
 volatile u8 *uart = (u8 *) 0x09000000;
 
@@ -23,6 +25,8 @@ void kmain(u64 dtb_ptr32, [[maybe_unused]] u64 x1, [[maybe_unused]] u64 x2, [[ma
 {
     void *fdt = (void *)(uintptr_t)dtb_ptr32;
 
+    init_idmap();
+
     info("fdt pointer %p", fdt);
 
     phys_mem_init(9, 9, 9, 9);
@@ -36,6 +40,6 @@ void kmain(u64 dtb_ptr32, [[maybe_unused]] u64 x1, [[maybe_unused]] u64 x2, [[ma
 
 
     for(;;) {
-        asm volatile("wfi");
+       wfi();
     }
 }
