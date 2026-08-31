@@ -13,7 +13,7 @@ set print sevenbit-strings off
 target remote localhost:1234
 
 # Load symbols from kernel
-file build/kernel.elf
+file build/src/kernel.elf
 
 # Set architecture
 set architecture aarch64
@@ -30,7 +30,7 @@ end
 define rrr
     echo [reset + reload + run]\n
     monitor system_reset
-    file build/kernel.elf
+    file build/src/kernel.elf
     load
     break kmain
     continue
