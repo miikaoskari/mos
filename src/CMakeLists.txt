@@ -8,6 +8,7 @@ add_executable(kernel.elf
     log.c
     drivers/irq/arm/gicv3/gicv3.c
     drivers/tty/serial/arm/pl011/pl011.c
+    idmap.c
 )
 
 target_include_directories(kernel.elf PRIVATE ${CMAKE_SOURCE_DIR}/include)
