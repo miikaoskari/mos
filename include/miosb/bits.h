@@ -22,6 +22,10 @@
 #define BIT(n) (UL(1) << (n))
 #define GENMASK(hi, lo) ((~UL(0) << (lo)) & (~UL(0) >> (63 - (hi))))
 
+#define __bf_shf(x) (__builtin_ffsll(x) - 1)
+#define FIELD_PREP(mask, val) (((val) << __bf_shf(mask)) & (mask))
+#define FIELD_GET(mask, reg)  (((reg) & (mask)) >> __bf_shf(mask))
+
 #endif
 
 #endif // BITS_H
