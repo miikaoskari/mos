@@ -1,7 +1,6 @@
 #include "miosb/memory.h"
 #include "miosb/string.h"
 #include "miosb/types.h"
-#include <stdint.h>
 
 /**
  * | order | size    |
