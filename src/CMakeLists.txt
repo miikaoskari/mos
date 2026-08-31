@@ -39,3 +39,15 @@ target_link_options(kernel.elf PRIVATE
     -nostdlib
     -g
 )
+
+set_target_properties(kernel.elf PROPERTIES LINK_DEPENDS ${CMAKE_SOURCE_DIR}/linker.ld)
+
+if(NOT CMAKE_OBJCOPY)
+    find_program(CMAKE_OBJCOPY NAMES ${CMAKE_C_COMPILER_TARGET}-objcopy objcopy llvm-objcopy REQUIRED)
+endif()
+
+add_custom_command(TARGET kernel.elf POST_BUILD
+    COMMAND ${CMAKE_OBJCOPY} -O binary $<TARGET_FILE:kernel.elf> ${CMAKE_BINARY_DIR}/kernel.img
+    BYPRODUCTS ${CMAKE_BINARY_DIR}/kernel.img
+    COMMENT "Converting kernel.elf to raw arm64 Image format (kernel.img)"
+)
